@@ -1,6 +1,6 @@
 <?php
 $host = 'sql300.infinityfree.com';
-$dbname = 'if0_42521402_XXX'; // Replace with your complete database name
+$dbname = 'retail_db'; // Replace with your complete database name
 $username = 'if0_42521402';
 $password = 'n6AXDxQj4fLKYgx';
 
