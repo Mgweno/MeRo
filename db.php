@@ -8,18 +8,14 @@ $password = 'AVNS_aVZpPralnEh3REL5ZP';
 try {
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
     
-    // Aiven requires SSL connection options
+    // SSL options required by Aiven MySQL
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_SSL_CA => __DIR__ . '/ca.pem', // Optional if you download the CA certificate, but usually works with options below
+        PDO::MYSQL_ATTR_SSL_CA => true,
+        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
     ];
 
-    // Alternatively, if you just want to connect without managing the certificate file locally right away:
-    $pdo = new PDO($dsn, $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
-    ]);
-
+    $pdo = new PDO($dsn, $username, $password, $options);
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
